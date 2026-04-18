@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>My Account – AquaLive</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
+<style>
+.profile-grid { display: grid; grid-template-columns: 280px 1fr; gap: 28px; margin-top: 32px; }
+
+.profile-sidebar {
+  background: #fff;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  height: fit-content;
+  position: sticky;
+  top: 90px;
+}
+
+.profile-avatar-section {
+  background: linear-gradient(135deg, var(--deep), var(--ocean));
+  padding: 36px 24px;
+  text-align: center;
+  color: #fff;
+}
+
+.avatar-circle {
+  width: 80px;
+  height: 80px;
+  background: rgba(255,255,255,0.2);
+  border: 3px solid rgba(255,255,255,0.5);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+  margin: 0 auto 12px;
+}
+
+.profile-name { font-family: var(--font-display); font-size: 20px; margin-bottom: 4px; }
+.profile-email { font-size: 13px; opacity: 0.8; }
+.profile-joined { font-size: 12px; opacity: 0.6; margin-top: 6px; }
+
+.profile-menu { padding: 12px; }
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--slate);
+  transition: all 0.15s;
+  text-decoration: none;
+}
+.menu-item:hover   { background: var(--mist); color: var(--ocean); }
+.menu-item.active  { background: var(--ocean); color: #fff; }
+.menu-item.danger  { color: var(--error); }
+.menu-item.danger:hover { background: #fee2e2; color: var(--error); }
+
+/* PANELS */
+.panel-content { min-height: 400px; }
+
+.panel {
+  background: #fff;
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  box-shadow: var(--shadow);
+  display: none;
+}
+.panel.active { display: block; }
+
+/* ORDER CARDS */
+.order-card {
+  border: 1.5px solid var(--pebble);
+  border-radius: var(--radius);
+  margin-bottom: 16px;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+.order-card:hover { border-color: var(--ocean); }
+
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  cursor: pointer;
+  background: var(--mist);
+}
+
+.order-id { font-weight: 700; font-size: 14px; color: var(--ocean); }
+.order-meta { font-size: 12px; color: var(--slate); margin-top: 3px; }
+
+.order-details {
+  display: none;
+  padding: 20px;
+  border-top: 1px solid var(--pebble);
+}
+
+.order-details.open { display: block; }
+
+.detail-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  padding: 5px 0;
+  border-bottom: 1px dashed var(--pebble);
+}
+
+.detail-item:last-child { border-bottom: none; }
+
+/* STATS */
+.stats-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-bottom: 28px; }
+.stat-box { background: var(--mist); border-radius: var(--radius); padding: 20px; text-align: center; }
+.stat-box .num { font-family: var(--font-display); font-size: 32px; color: var(--ocean); }
+.stat-box .lbl { font-size: 12px; color: var(--slate); margin-top: 4px; }
+
+/* LOGIN / REGISTER */
+.auth-box {
+  max-width: 440px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: var(--radius-lg);
+  padding: 48px 40px;
+  box-shadow: var(--shadow-lg);
+  text-align: center;
+}
+
+.auth-box h2 { margin-bottom: 8px; }
+.auth-box p  { color: var(--slate); font-size: 14px; margin-bottom: 28px; }
+
+.auth-tabs { display: flex; background: var(--mist); border-radius: 8px; padding: 4px; margin-bottom: 24px; }
+.auth-tab  { flex: 1; padding: 8px; border-radius: 6px; cursor: pointer; font-size: 14px; font-weight: 600; color: var(--slate); transition: all 0.2s; text-align: center; }
+.auth-tab.active { background: #fff; color: var(--ocean); box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+
+@media (max-width: 900px) { .profile-grid { grid-template-columns: 1fr; } .profile-sidebar { position: static; } }
+@media (max-width: 500px) { .auth-box { padding: 32px 20px; } .stats-row { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div id="main-navbar"></div>
+
+<div class="page-header">
+  <h1>My Account</h1>
+  <p>Manage your profile, orders, and preferences</p>
+</div>
+
+<section class="section-gap" style="padding-top:32px;">
+  <div class="page-wrap">
+
+    <!-- NOT LOGGED IN -->
+    <div id="auth-section">
+      <div class="auth-box">
+        <div style="font-size:52px;margin-bottom:16px;">🐟</div>
+        <h2>Welcome to AquaLive</h2>
+        <p>Sign in to view your orders and manage your account</p>
+
+        <div class="auth-tabs">
+          <div class="auth-tab active" onclick="switchTab('login',this)">Sign In</div>
+          <div class="auth-tab" onclick="switchTab('register',this)">Create Account</div>
+        </div>
+
+        <!-- LOGIN -->
+        <div id="login-form">
+          <div class="form-group" style="text-align:left;">
+            <label>Name</label>
+            <input type="text" id="login-name" placeholder="Your name">
+          </div>
+          <div class="form-group" style="text-align:left;">
+            <label>Email</label>
+            <input type="email" id="login-email" placeholder="your@email.com">
+          </div>
+          <button class="btn btn-primary btn-lg" onclick="doLogin()" style="margin-top:8px;">Sign In</button>
+          <p style="font-size:12px;color:var(--slate);margin-top:16px;">
+            ⚠️ Demo account — no real authentication. Educational purposes only.
+          </p>
+        </div>
+
+        <!-- REGISTER -->
+        <div id="register-form" style="display:none;">
+          <div class="form-group" style="text-align:left;">
+            <label>Full Name</label>
+            <input type="text" id="reg-name" placeholder="Your full name">
+          </div>
+          <div class="form-group" style="text-align:left;">
+            <label>Email</label>
+            <input type="email" id="reg-email" placeholder="your@email.com">
+          </div>
+          <div class="form-group" style="text-align:left;">
+            <label>Location</label>
+            <select id="reg-state">
+              <option value="">Select State</option>
+              <option>Kuala Lumpur</option><option>Selangor</option><option>Johor</option>
+              <option>Penang</option><option>Perak</option><option>Others</option>
+            </select>
+          </div>
+          <button class="btn btn-primary btn-lg" onclick="doRegister()" style="margin-top:8px;">Create Account</button>
+          <p style="font-size:12px;color:var(--slate);margin-top:16px;">
+            ⚠️ Demo only — no real account is created.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- LOGGED IN -->
+    <div id="profile-section" style="display:none;">
+      <div class="profile-grid">
+
+        <!-- SIDEBAR -->
+        <div class="profile-sidebar">
+          <div class="profile-avatar-section">
+            <div class="avatar-circle">👤</div>
+            <div class="profile-name" id="p-name"></div>
+            <div class="profile-email" id="p-email"></div>
+            <div class="profile-joined" id="p-joined"></div>
+          </div>
+
+          <div class="profile-menu">
+            <div class="menu-item active" onclick="showPanel('dashboard',this)">📊 Dashboard</div>
+            <div class="menu-item" onclick="showPanel('orders',this)">📦 My Orders</div>
+            <div class="menu-item" onclick="showPanel('settings',this)">⚙️ Settings</div>
+            <div class="menu-item danger" onclick="doLogout()">🚪 Sign Out</div>
+          </div>
+        </div>
+
+        <!-- CONTENT -->
+        <div class="panel-content">
+
+          <!-- DASHBOARD PANEL -->
+          <div class="panel active" id="panel-dashboard">
+            <h2 style="margin-bottom:24px;">Dashboard</h2>
+
+            <div class="stats-row">
+              <div class="stat-box">
+                <div class="num" id="stat-orders">0</div>
+                <div class="lbl">Total Orders</div>
+              </div>
+              <div class="stat-box">
+                <div class="num" id="stat-spent">RM0</div>
+                <div class="lbl">Total Spent</div>
+              </div>
+              <div class="stat-box">
+                <div class="num" id="stat-cart">0</div>
+                <div class="lbl">Cart Items</div>
+              </div>
+            </div>
+
+            <h3 style="margin-bottom:16px;font-family:var(--font-body);font-weight:700;">Recent Orders</h3>
+            <div id="recent-orders-list"></div>
+
+            <div style="margin-top:24px;">
+              <a href="Shop.html" class="btn btn-outline">Continue Shopping →</a>
+            </div>
+          </div>
+
+          <!-- ORDERS PANEL -->
+          <div class="panel" id="panel-orders">
+            <h2 style="margin-bottom:8px;">My Orders</h2>
+            <p style="color:var(--slate);font-size:14px;margin-bottom:24px;">Click on any order to see details</p>
+            <div id="all-orders-list"></div>
+          </div>
+
+          <!-- SETTINGS PANEL -->
+          <div class="panel" id="panel-settings">
+            <h2 style="margin-bottom:24px;">Account Settings</h2>
+
+            <div class="form-group">
+              <label>Display Name</label>
+              <input type="text" id="s-name">
+            </div>
+            <div class="form-group">
+              <label>Email</label>
+              <input type="email" id="s-email">
+            </div>
+            <div class="form-group">
+              <label>Preferred State</label>
+              <select id="s-state">
+                <option>Kuala Lumpur</option><option>Selangor</option>
+                <option>Johor</option><option>Penang</option><option>Others</option>
+              </select>
+            </div>
+
+            <button class="btn btn-primary" onclick="saveSettings()" style="width:auto;">Save Changes</button>
+
+            <div style="margin-top:32px;padding:20px;background:#fee2e2;border-radius:var(--radius);">
+              <h3 style="font-family:var(--font-body);font-size:15px;color:var(--error);margin-bottom:8px;">Danger Zone</h3>
+              <p style="font-size:13px;color:var(--slate);margin-bottom:12px;">Clear all your local data including orders and cart.</p>
+              <button class="btn btn-danger btn-sm" onclick="clearAllData()">Clear All Data</button>
+            </div>
+
+            <p style="font-size:12px;color:var(--slate);margin-top:16px;">⚠️ This is a demo account. All data is stored locally in your browser only.</p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div><div class="footer-logo">🐟 AquaLive</div><p class="footer-tagline">Premium live fish delivered safely.</p></div>
+    <div><h4>Shop</h4><a href="Shop.html">All Products</a></div>
+    <div><h4>Help</h4><a href="About.html">About Us</a><a href="Contact.html">Contact</a></div>
+    <div><h4>Contact</h4><a href="#">📧 hello@aqualive.my</a></div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 AquaLive · 6751YCOM Project · YPC International College</span>
+    <span class="footer-edu">⚠️ Educational demo only — no real transactions</span>
+  </div>
+</footer>
+
+<script src="aqualive.js"></script>
+<script>
+injectNavbar("Shop");
+
+/* AUTH */
+function switchTab(tab, el) {
+  document.querySelectorAll(".auth-tab").forEach(t=>t.classList.remove("active"));
+  el.classList.add("active");
+  document.getElementById("login-form").style.display    = tab==="login"    ? "block" : "none";
+  document.getElementById("register-form").style.display = tab==="register" ? "block" : "none";
+}
+
+function doLogin() {
+  const name  = document.getElementById("login-name").value.trim();
+  const email = document.getElementById("login-email").value.trim();
+  if (!name || !email) { alert("Please enter your name and email"); return; }
+  Auth.login(name, email);
+  renderProfile();
+}
+
+function doRegister() {
+  const name  = document.getElementById("reg-name").value.trim();
+  const email = document.getElementById("reg-email").value.trim();
+  if (!name || !email) { alert("Please fill in all fields"); return; }
+  Auth.login(name, email);
+  renderProfile();
+}
+
+function doLogout() {
+  Auth.logout();
+  document.getElementById("auth-section").style.display    = "block";
+  document.getElementById("profile-section").style.display = "none";
+}
+
+/* PANELS */
+function showPanel(id, el) {
+  document.querySelectorAll(".panel").forEach(p=>p.classList.remove("active"));
+  document.querySelectorAll(".menu-item").forEach(m=>m.classList.remove("active"));
+  document.getElementById("panel-"+id).classList.add("active");
+  if (el) el.classList.add("active");
+
+  if (id === "orders")   renderAllOrders();
+  if (id === "settings") populateSettings();
+}
+
+function renderOrderCard(o, limit) {
+  const items = limit ? o.items.slice(0,limit) : o.items;
+  const rows = items.map(i =>
+    `<div class="detail-item"><span>${i.name} × ${i.qty}</span><span>RM ${(i.price*i.qty).toFixed(2)}</span></div>`
+  ).join("");
+
+  return `
+    <div class="order-card">
+      <div class="order-header" onclick="this.nextElementSibling.classList.toggle('open')">
+        <div>
+          <div class="order-id">${o.id}</div>
+          <div class="order-meta">${o.date} · ${o.items.length} item${o.items.length!==1?'s':''}</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div style="font-weight:700;color:var(--ocean);">RM ${o.total}</div>
+          <span class="badge badge-${o.status||'processing'}">${o.status||'processing'}</span>
+        </div>
+      </div>
+      <div class="order-details">
+        ${rows}
+        <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--pebble);">
+          <strong>Delivery:</strong> ${o.customer?.address || '—'}
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function renderProfile() {
+  const user = Auth.get();
+  if (!user) { document.getElementById("auth-section").style.display="block"; document.getElementById("profile-section").style.display="none"; return; }
+
+  document.getElementById("auth-section").style.display    = "none";
+  document.getElementById("profile-section").style.display = "block";
+
+  document.getElementById("p-name").textContent   = user.name;
+  document.getElementById("p-email").textContent  = user.email;
+  document.getElementById("p-joined").textContent = "Member since " + (user.joined||"2026");
+
+  const orders = Orders.get();
+  const total  = orders.reduce((s,o)=>s+parseFloat(o.total||0),0);
+
+  document.getElementById("stat-orders").textContent = orders.length;
+  document.getElementById("stat-spent").textContent  = "RM" + total.toFixed(0);
+  document.getElementById("stat-cart").textContent   = Cart.count();
+
+  const recentEl = document.getElementById("recent-orders-list");
+  recentEl.innerHTML = orders.length === 0
+    ? `<div style="text-align:center;padding:32px;color:var(--slate);">
+        <div style="font-size:40px;margin-bottom:10px;">📦</div>
+        <p>No orders yet. <a href="Shop.html" style="color:var(--ocean);font-weight:700;">Start shopping!</a></p>
+      </div>`
+    : orders.slice(0,3).map(o=>renderOrderCard(o,2)).join("");
+}
+
+function renderAllOrders() {
+  const orders = Orders.get();
+  const el = document.getElementById("all-orders-list");
+  el.innerHTML = orders.length === 0
+    ? `<div style="text-align:center;padding:60px;color:var(--slate);">
+        <div style="font-size:52px;margin-bottom:12px;">📦</div>
+        <h3>No orders yet</h3>
+        <p style="margin-bottom:20px;">Browse our collection and place your first order!</p>
+        <a href="Shop.html" class="btn btn-primary" style="width:auto;display:inline-flex;">Shop Now</a>
+      </div>`
+    : orders.map(o=>renderOrderCard(o,null)).join("");
+}
+
+function populateSettings() {
+  const u = Auth.get();
+  if (!u) return;
+  document.getElementById("s-name").value  = u.name;
+  document.getElementById("s-email").value = u.email;
+}
+
+function saveSettings() {
+  const u = Auth.get();
+  u.name  = document.getElementById("s-name").value.trim();
+  u.email = document.getElementById("s-email").value.trim();
+  Auth.save(u);
+  document.getElementById("p-name").textContent  = u.name;
+  document.getElementById("p-email").textContent = u.email;
+  alert("Settings saved!");
+}
+
+function clearAllData() {
+  if (!confirm("This will clear all cart, orders, and account data. Continue?")) return;
+  localStorage.clear();
+  location.reload();
+}
+
+renderProfile();
+</script>
+</body>
+</html>

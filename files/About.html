@@ -1,0 +1,107 @@
+<!-- ABOUT.HTML -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>About AquaLive</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
+<style>
+.about-hero { background: linear-gradient(135deg,var(--deep),var(--ocean)); color:#fff; padding:72px 24px; text-align:center; }
+.about-hero h1 { font-size:clamp(36px,5vw,60px); margin-bottom:12px; }
+.about-hero p  { opacity:.8; max-width:560px; margin:0 auto; font-size:16px; }
+.values-grid   { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:20px; }
+.value-card    { background:#fff; border-radius:var(--radius-lg); padding:32px 24px; box-shadow:var(--shadow); text-align:center; }
+.value-card .icon { font-size:40px; margin-bottom:16px; }
+.value-card h3 { font-family:var(--font-body); font-weight:700; margin-bottom:8px; }
+.value-card p  { color:var(--slate); font-size:14px; }
+.timeline { position:relative; }
+.timeline::before { content:""; position:absolute; left:20px; top:0; bottom:0; width:2px; background:var(--pebble); }
+.tl-item { display:flex; gap:32px; margin-bottom:32px; position:relative; }
+.tl-dot  { width:40px; height:40px; background:var(--ocean); border-radius:50%; display:flex; align-items:center; justify-content:center; color:#fff; font-weight:700; flex-shrink:0; font-size:14px; position:relative; z-index:1; }
+.tl-content h4 { font-family:var(--font-body); font-weight:700; margin-bottom:4px; }
+.tl-content p  { font-size:14px; color:var(--slate); }
+.doa-box { background:linear-gradient(135deg,var(--deep),var(--ocean)); color:#fff; border-radius:var(--radius-lg); padding:40px; text-align:center; }
+.doa-box h2 { font-size:28px; margin-bottom:12px; }
+.doa-box p  { opacity:.85; max-width:480px; margin:0 auto; }
+</style>
+</head>
+<body>
+<div id="main-navbar"></div>
+<div class="about-hero">
+  <h1>About AquaLive</h1>
+  <p>Malaysia's trusted online aquarium store — bringing the ocean's beauty to your home safely and ethically.</p>
+</div>
+
+<section class="section-gap">
+  <div class="page-wrap">
+    <h2 class="section-title">Our Story</h2>
+    <p class="section-sub">Born from a passion for fishkeeping, built to serve a community</p>
+    <div class="grid-2" style="align-items:center;">
+      <div>
+        <p style="margin-bottom:16px;line-height:1.8;">AquaLive was founded by aquarium enthusiasts who were frustrated by the limitations of physical pet stores in Malaysia — inconsistent stock, poor fish health, and zero guidance for beginners.</p>
+        <p style="margin-bottom:16px;line-height:1.8;">We set out to build a platform where every fish is health-checked before dispatch, every order is oxygen-packed for safe transit, and every customer receives free expert guidance through our Fish Care Guide.</p>
+        <p style="line-height:1.8;">Today, AquaLive serves hundreds of happy fishkeepers across Peninsular Malaysia — from first-time guppy owners to seasoned Discus collectors.</p>
+      </div>
+      <div style="background:linear-gradient(135deg,var(--foam),var(--mist));border-radius:var(--radius-lg);padding:48px;text-align:center;font-size:64px;">🐟<br><small style="font-size:18px;color:var(--ocean);font-family:var(--font-display);">Est. 2026</small></div>
+    </div>
+  </div>
+</section>
+
+<section class="section-gap" style="background:var(--mist);">
+  <div class="page-wrap">
+    <h2 class="section-title" style="text-align:center;">Our Values</h2>
+    <p class="section-sub" style="text-align:center;">What we believe in and how we operate</p>
+    <div class="values-grid">
+      <div class="value-card"><div class="icon">🐟</div><h3>Animal Welfare First</h3><p>All fish are captive-bred, quarantined, and health-checked. We never sell wild-caught fish.</p></div>
+      <div class="value-card"><div class="icon">🌿</div><h3>Environmental Responsibility</h3><p>We educate customers against releasing aquarium fish into local waterways, which can devastate native ecosystems.</p></div>
+      <div class="value-card"><div class="icon">📚</div><h3>Education & Support</h3><p>Our Fish Care Guide is free for everyone — customer or not. Informed fish keepers = healthy fish.</p></div>
+      <div class="value-card"><div class="icon">🔒</div><h3>Privacy & Trust</h3><p>We comply with Malaysia's PDPA 2010. Your data is never sold. Payments secured via trusted gateways.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section-gap">
+  <div class="page-wrap">
+    <h2 class="section-title">Delivery Process</h2>
+    <p class="section-sub">Every fish we ship follows this strict 5-step process</p>
+    <div class="timeline">
+      <div class="tl-item"><div class="tl-dot">1</div><div class="tl-content"><h4>Order Received</h4><p>Your order triggers our packing team within 2 hours during business hours.</p></div></div>
+      <div class="tl-item"><div class="tl-dot">2</div><div class="tl-content"><h4>Fish Selection & Health Check</h4><p>We hand-pick your fish and conduct a final health inspection before packing.</p></div></div>
+      <div class="tl-item"><div class="tl-dot">3</div><div class="tl-content"><h4>Oxygen-Filled Packing</h4><p>Each fish is sealed in an oxygen-filled polythene bag, placed in an insulated polystyrene box with heat or cool packs depending on season.</p></div></div>
+      <div class="tl-item"><div class="tl-dot">4</div><div class="tl-content"><h4>Express Courier</h4><p>Dispatched with a tracked express courier. Transit time is typically 12–24 hours for Peninsular Malaysia.</p></div></div>
+      <div class="tl-item"><div class="tl-dot">5</div><div class="tl-content"><h4>Safe Arrival & DOA Guarantee</h4><p>If any fish arrives dead, submit photo evidence within 24 hours for a free replacement or refund.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section-gap" style="background:var(--mist);" id="doa">
+  <div class="page-wrap">
+    <div class="doa-box">
+      <h2>📦 Dead on Arrival (DOA) Policy</h2>
+      <p>We guarantee every fish we ship. If your fish arrives dead, photograph it clearly in the unopened bag and contact us within <strong>24 hours</strong> of delivery. We will send a free replacement or issue a full refund — no questions asked.</p>
+      <div style="margin-top:24px;padding:16px;background:rgba(255,255,255,0.15);border-radius:8px;font-size:13px;max-width:400px;margin-left:auto;margin-right:auto;">
+        ⚠️ DOA claims must include photo evidence within 24 hours of delivery. Claims without evidence or after 24 hours cannot be processed.
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div><div class="footer-logo">🐟 AquaLive</div><p class="footer-tagline">Premium live fish delivered safely.</p></div>
+    <div><h4>Shop</h4><a href="Shop.html">All Products</a><a href="Guide.html">Fish Care Guide</a></div>
+    <div><h4>About</h4><a href="About.html">Our Story</a><a href="About.html#doa">DOA Policy</a></div>
+    <div><h4>Contact</h4><a href="#">📧 hello@aqualive.my</a><a href="#">📞 +60 12-345 6789</a></div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 AquaLive · 6751YCOM Project · YPC International College</span>
+    <span class="footer-edu">⚠️ Educational demo only — no real transactions</span>
+  </div>
+</footer>
+<script src="aqualive.js"></script>
+<script>injectNavbar("About");</script>
+</body>
+</html>
