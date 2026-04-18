@@ -6,11 +6,11 @@
 /* ── PRODUCT DATABASE ─────────────────────────────────────── */
 const PRODUCTS = [
   // BETTA
-  { id:"b1", name:"Betta – Red Halfmoon",    category:"Betta Fish",      price:25, tag:"Popular",  care:"Easy",       temp:"24–28°C", size:"5–7 cm",  desc:"A stunning red halfmoon betta known for its vibrant fins. Best kept alone in a 10L+ tank.", image:"images/betta.jpg" },
-  { id:"b2", name:"Betta – Blue Crowntail",  category:"Betta Fish",      price:30, tag:"Premium",  care:"Easy",       temp:"24–28°C", size:"5–7 cm",  desc:"Striking blue crowntail with elaborate fin edges. A showstopper in any planted tank.", image:"images/betta2.jpg" },
-  { id:"b3", name:"Betta – Purple Galaxy",   category:"Betta Fish",      price:45, tag:"Rare",     care:"Moderate",   temp:"25–28°C", size:"5–7 cm",  desc:"Rare galaxy pattern betta with iridescent purple scales. Limited stock.", image:"images/betta-purple.jpg" },
+  { id:"b1", name:"Betta – Red Halfmoon",    category:"Betta Fish",      price:25, tag:"Popular",  care:"Easy",       temp:"24–28°C", size:"5–7 cm",  desc:"A stunning red halfmoon betta known for its vibrant fins. Best kept alone in a 10L+ tank.", image:"Images/betta.jpg" },
+  { id:"b2", name:"Betta – Blue Crowntail",  category:"Betta Fish",      price:30, tag:"Premium",  care:"Easy",       temp:"24–28°C", size:"5–7 cm",  desc:"Striking blue crowntail with elaborate fin edges. A showstopper in any planted tank.", image:"Images/betta2.jpg" },
+  { id:"b3", name:"Betta – Purple Galaxy",   category:"Betta Fish",      price:45, tag:"Rare",     care:"Moderate",   temp:"25–28°C", size:"5–7 cm",  desc:"Rare galaxy pattern betta with iridescent purple scales. Limited stock.", image:"Images/betta-purple.jpg" },
   // GOLDFISH
-  { id:"g1", name:"Goldfish – Fantail",      category:"Goldfish",        price:18, tag:"Beginner", care:"Easy",       temp:"18–22°C", size:"15–20 cm",desc:"Hardy fantail goldfish perfect for beginners. Thrives in a 60L+ tank.", image:"images/goldfish.jpg" },
+  { id:"g1", name:"Goldfish – Fantail",      category:"Goldfish",        price:18, tag:"Beginner", care:"Easy",       temp:"18–22°C", size:"15–20 cm",desc:"Hardy fantail goldfish perfect for beginners. Thrives in a 60L+ tank.", image:"Images/goldfish.jpg" },
   { id:"g2", name:"Goldfish – Oranda",       category:"Goldfish",        price:35, tag:"Premium",  care:"Moderate",   temp:"18–22°C", size:"20–30 cm",desc:"Elegant oranda with a distinctive head growth (wen). A prized collector fish.", image:"images/goldfish-oranda.jpg" },
   // FRESHWATER
   { id:"f1", name:"Neon Tetra (10 pack)",    category:"Freshwater Fish", price:20, tag:"Beginner", care:"Easy",       temp:"22–26°C", size:"3–4 cm",  desc:"Iconic schooling fish with electric blue and red stripes. Great in groups of 10+.", image:"images/neon-tetra.jpg" },
