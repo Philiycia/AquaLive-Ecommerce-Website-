@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>AquaLive – Premium Live Fish Delivered</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
+<style>
+/* HERO */
+.hero {
+  position: relative;
+  min-height: 92vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: linear-gradient(160deg, #010b18 0%, #023e8a 50%, #0077b6 100%);
+}
+
+.hero-bg-bubbles {
+  position: absolute; inset: 0; overflow: hidden; pointer-events: none;
+}
+
+.bubble {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(0,180,216,0.15);
+  animation: rise linear infinite;
+}
+
+@keyframes rise {
+  0%   { transform: translateY(100vh) scale(1); opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: .5; }
+  100% { transform: translateY(-20vh) scale(1.1); opacity: 0; }
+}
+
+.hero-content {
+  position: relative; z-index: 2;
+  text-align: center;
+  padding: 80px 24px;
+  max-width: 760px;
+}
+
+.hero-badge {
+  display: inline-block;
+  background: rgba(0,180,216,0.2);
+  border: 1px solid rgba(0,180,216,0.4);
+  color: var(--foam);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: 6px 18px;
+  border-radius: 20px;
+  margin-bottom: 24px;
+}
+
+.hero h1 {
+  font-size: clamp(40px, 7vw, 80px);
+  color: #fff;
+  line-height: 1.08;
+  margin-bottom: 20px;
+}
+
+.hero h1 span { color: var(--reef); }
+
+.hero p {
+  font-size: 18px;
+  color: rgba(255,255,255,0.75);
+  margin-bottom: 36px;
+  line-height: 1.7;
+}
+
+.hero-btns {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  align-items: center;   /* add this */
+  margin: 10 auto;        /* ensures true centering */
+}
+
+.btn-white {
+  background: #fff;
+  color: var(--ocean);
+  padding: 14px 32px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  text-decoration: none;
+}
+.btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
+
+.btn-glass {
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+  border: 2px solid rgba(255,255,255,0.3);
+  padding: 12px 28px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.2s;
+  text-decoration: none;
+}
+.btn-glass:hover { background: rgba(255,255,255,0.2); }
+
+.hero-stats {
+  display: flex;
+  justify-content: center;   /* center horizontally */
+  align-items: center;
+  gap: 48px;
+  margin-top: 60px;          /* space from buttons */
+}
+
+
+
+
+
+.stat { text-align: center; }
+.stat strong { display: block; font-family: var(--font-display); font-size: 28px; color: #fff; }
+.stat span { font-size: 12px; color: rgba(255,255,255,0.6); text-transform: uppercase; letter-spacing: .08em; }
+
+/* TRUST BAR */
+.trust-bar {
+  background: var(--ocean);
+  padding: 16px 24px;
+}
+
+.trust-inner {
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.trust-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* CATEGORY CARDS */
+.cat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+  gap: 20px;
+}
+
+.cat-card {
+  background: #fff;
+  border-radius: var(--radius-lg);
+  padding: 28px 20px;
+  text-align: center;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: all 0.25s;
+  border: 2px solid transparent;
+}
+
+.cat-card:hover {
+  border-color: var(--ocean);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.cat-card .icon { font-size: 40px; margin-bottom: 12px; }
+.cat-card h3 { font-family: var(--font-body); font-size: 15px; font-weight: 700; color: var(--ink); }
+.cat-card p  { font-size: 12px; color: var(--slate); margin-top: 4px; }
+
+/* WHY CHOOSE */
+.why-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+
+.why-img {
+  background: linear-gradient(135deg, var(--deep), var(--ocean));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 40px;
+  color: #fff;
+}
+
+.why-img-inner { font-size: 80px; text-align: center; }
+.why-img-inner p { font-size: 16px; opacity: 0.8; margin-top: 10px; }
+
+.why-content {
+  background: #fff;
+  padding: 56px 48px;
+}
+
+.why-content h2 { margin-bottom: 8px; }
+.why-content .sub { color: var(--slate); margin-bottom: 32px; }
+
+.why-list { list-style: none; }
+.why-list li {
+  display: flex;
+  gap: 14px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--pebble);
+}
+.why-list li:last-child { border-bottom: none; }
+.why-icon { font-size: 24px; flex-shrink: 0; margin-top: 2px; }
+.why-text strong { display: block; font-weight: 700; color: var(--ink); margin-bottom: 2px; }
+.why-text span { font-size: 13px; color: var(--slate); }
+
+/* DELIVERY STEPS */
+.delivery-steps {
+  display: flex;
+  gap: 0;
+  counter-reset: step;
+}
+
+.step-item {
+  flex: 1;
+  text-align: center;
+  padding: 32px 16px;
+  position: relative;
+}
+
+.step-item:not(:last-child)::after {
+  content: "→";
+  position: absolute;
+  right: -12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 24px;
+  color: var(--ocean);
+  font-weight: 700;
+}
+
+.step-num {
+  width: 52px;
+  height: 52px;
+  background: var(--ocean);
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 900;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 14px;
+}
+
+.step-item h4 { font-family: var(--font-body); font-weight: 700; margin-bottom: 6px; }
+.step-item p  { font-size: 12px; color: var(--slate); }
+
+/* TESTIMONIALS */
+.testi-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(280px,1fr)); gap: 20px; }
+
+.testi-card {
+  background: #fff;
+  padding: 28px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+}
+
+.testi-stars { color: #f59e0b; font-size: 16px; margin-bottom: 12px; }
+.testi-text  { color: var(--slate); font-size: 14px; line-height: 1.7; margin-bottom: 16px; font-style: italic; }
+.testi-author { font-weight: 700; font-size: 14px; }
+.testi-role   { font-size: 12px; color: var(--slate); }
+
+/* CTA SECTION */
+.cta-section {
+  background: linear-gradient(135deg, var(--deep), var(--ocean));
+  border-radius: var(--radius-lg);
+  padding: 72px 40px;
+  text-align: center;
+  color: #fff;
+}
+
+.cta-section h2 { font-size: clamp(28px,4vw,44px); margin-bottom: 12px; }
+.cta-section p  { opacity: 0.8; font-size: 16px; margin-bottom: 32px; }
+
+@media (max-width: 768px) {
+  .hero-stats { position: static; transform: none; margin-top: 40px; gap: 24px; flex-wrap: wrap; justify-content: center; }
+  .why-grid   { grid-template-columns: 1fr; }
+  .why-img    { padding: 40px 24px; }
+  .why-content{ padding: 40px 24px; }
+  .delivery-steps { flex-direction: column; gap: 12px; }
+  .step-item:not(:last-child)::after { display: none; }
+}
+</style>
+</head>
+<body>
+
+<div id="main-navbar"></div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-bubbles" id="bubbles"></div>
+
+  <div class="hero-content">
+    <div class="hero-badge">🐟 Malaysia's Premier Live Fish Store</div>
+    <h1>Bring Your<br><span>Aquarium</span><br>to Life</h1>
+    <p>Premium live fish, starter kits, and expert guidance — delivered safely to your door with oxygen-packed freshness and a DOA guarantee.</p>
+    <div class="hero-btns">
+      <a href="Shop.html" class="btn-white">Shop Fish Now</a>
+      <a href="Guide.html" class="btn-glass">Fish Care Guide</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><strong>22+</strong><span>Species</span></div>
+      <div class="stat"><strong>500+</strong><span>Happy Customers</span></div>
+      <div class="stat"><strong>DOA</strong><span>Guarantee</span></div>
+      <div class="stat"><strong>48hr</strong><span>Safe Delivery</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-inner">
+    <div class="trust-item">🫧 Oxygen-packed live delivery</div>
+    <div class="trust-item">🐟 Health-checked fish</div>
+    <div class="trust-item">📦 DOA replacement policy</div>
+    <div class="trust-item">📚 Free fish care guides</div>
+    <div class="trust-item">🚚 Peninsular Malaysia shipping</div>
+  </div>
+</div>
+
+<!-- CATEGORIES -->
+<section class="section-gap">
+  <div class="page-wrap">
+    <h2 class="section-title">Shop by Category</h2>
+    <p class="section-sub">Find everything you need for a thriving aquarium</p>
+
+    <div class="cat-grid">
+      <div class="cat-card" onclick="location.href='Shop.html?cat=Freshwater Fish'">
+        <div class="icon">🐟</div>
+        <h3>Freshwater Fish</h3>
+        <p>7 species</p>
+      </div>
+      <div class="cat-card" onclick="location.href='Shop.html?cat=Betta Fish'">
+        <div class="icon">🐠</div>
+        <h3>Betta Fish</h3>
+        <p>3 varieties</p>
+      </div>
+      <div class="cat-card" onclick="location.href='Shop.html?cat=Goldfish'">
+        <div class="icon">🐡</div>
+        <h3>Goldfish</h3>
+        <p>2 varieties</p>
+      </div>
+      <div class="cat-card" onclick="location.href='Shop.html?cat=Aquarium Kits'">
+        <div class="icon">🪣</div>
+        <h3>Aquarium Kits</h3>
+        <p>5L – 60L</p>
+      </div>
+      <div class="cat-card" onclick="location.href='Shop.html?cat=Food & Accessories'">
+        <div class="icon">🧴</div>
+        <h3>Food & Accessories</h3>
+        <p>Food, conditioners & more</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED PRODUCTS -->
+<section class="section-gap" style="background: var(--mist);">
+  <div class="page-wrap">
+    <h2 class="section-title">Featured Products</h2>
+    <p class="section-sub">Our most popular fish and kits, ready for delivery</p>
+    <div class="grid-4" id="featured-products"></div>
+    <div style="text-align:center; margin-top:40px;">
+      <a href="Shop.html" class="btn btn-outline btn-lg">View All Products →</a>
+    </div>
+  </div>
+</section>
+
+<!-- WHY CHOOSE US -->
+<section class="section-gap">
+  <div class="page-wrap">
+    <div class="why-grid">
+      <div class="why-img">
+        <div class="why-img-inner">
+          🐟
+          <p>Live fish, safely packed<br>and delivered to you</p>
+        </div>
+      </div>
+      <div class="why-content">
+        <h2 class="section-title">Why Choose AquaLive?</h2>
+        <p class="sub">We combine quality, care, and convenience so your fish arrive healthy and your aquarium thrives.</p>
+        <ul class="why-list">
+          <li>
+            <span class="why-icon">🫧</span>
+            <div class="why-text">
+              <strong>Oxygen-Packed Safe Delivery</strong>
+              <span>Every fish is packed in oxygen-filled bags inside insulated boxes. Safe for 24–48 hours in transit.</span>
+            </div>
+          </li>
+          <li>
+            <span class="why-icon">✅</span>
+            <div class="why-text">
+              <strong>Health-Checked & DOA Guaranteed</strong>
+              <span>All fish are quarantined and health-checked before dispatch. Dead on arrival? We replace it, no questions asked.</span>
+            </div>
+          </li>
+          <li>
+            <span class="why-icon">📚</span>
+            <div class="why-text">
+              <strong>Free Expert Fish Care Guide</strong>
+              <span>Our comprehensive guide covers water quality, feeding, disease, and compatibility for every species we sell.</span>
+            </div>
+          </li>
+          <li>
+            <span class="why-icon">🌱</span>
+            <div class="why-text">
+              <strong>Ethically Sourced Fish</strong>
+              <span>100% captive-bred fish from licensed Malaysian breeders. No wild-caught species, ever.</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DELIVERY PROCESS -->
+<section class="section-gap" style="background: var(--mist);">
+  <div class="page-wrap">
+    <h2 class="section-title" style="text-align:center;">How We Deliver Live Fish</h2>
+    <p class="section-sub" style="text-align:center;">Your fish's safe journey from our facility to your home</p>
+
+    <div class="delivery-steps">
+      <div class="step-item">
+        <div class="step-num">1</div>
+        <h4>Order Placed</h4>
+        <p>You shop online and select your fish and accessories</p>
+      </div>
+      <div class="step-item">
+        <div class="step-num">2</div>
+        <h4>Fish Selected</h4>
+        <p>Our team hand-picks and health-checks your fish</p>
+      </div>
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <h4>Oxygen Packed</h4>
+        <p>Fish are sealed in oxygen bags inside insulated boxes</p>
+      </div>
+      <div class="step-item">
+        <div class="step-num">4</div>
+        <h4>Express Shipping</h4>
+        <p>Dispatched with express courier, tracked 24/7</p>
+      </div>
+      <div class="step-item">
+        <div class="step-num">5</div>
+        <h4>Safe Arrival</h4>
+        <p>Delivered healthy — or we replace under our DOA policy</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section-gap">
+  <div class="page-wrap">
+    <h2 class="section-title">What Our Customers Say</h2>
+    <p class="section-sub">Real reviews from real fish keepers</p>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"My neon tetras arrived in perfect condition — active and bright. The oxygen packing is genuinely impressive. Will definitely order again!"</p>
+        <div class="testi-author">Sarah L.</div>
+        <div class="testi-role">First-time aquarist, Kuala Lumpur</div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Ordered the 30L complete kit and a pair of Betta fish. Setup was so easy thanks to the guide. Everything arrived on the same day — super impressed!"</p>
+        <div class="testi-author">Marcus T.</div>
+        <div class="testi-role">Hobbyist, Penang</div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"The Discus I ordered looks amazing. AquaLive clearly sources from quality breeders. The Fish Care Guide has been invaluable for a newcomer like me."</p>
+        <div class="testi-author">Amir H.</div>
+        <div class="testi-role">Enthusiast collector, Selangor</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section-gap">
+  <div class="page-wrap">
+    <div class="cta-section">
+      <h2>Ready to Build Your Aquatic World?</h2>
+      <p>Browse our full range of live fish, starter kits, and accessories — delivered safely to your door.</p>
+      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+        <a href="Shop.html" class="btn-white">Shop Now</a>
+        <a href="Guide.html" class="btn-glass">Read the Fish Care Guide</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">🐟 AquaLive</div>
+      <p class="footer-tagline">Premium live fish and aquarium products delivered safely across Peninsular Malaysia. Founded by aquarium enthusiasts, for aquarium enthusiasts.</p>
+    </div>
+    <div>
+      <h4>Shop</h4>
+      <a href="Shop.html?cat=Freshwater Fish">Freshwater Fish</a>
+      <a href="Shop.html?cat=Betta Fish">Betta Fish</a>
+      <a href="Shop.html?cat=Goldfish">Goldfish</a>
+      <a href="Shop.html?cat=Aquarium Kits">Aquarium Kits</a>
+      <a href="Shop.html?cat=Food & Accessories">Food & Accessories</a>
+    </div>
+    <div>
+      <h4>Help</h4>
+      <a href="Guide.html">Fish Care Guide</a>
+      <a href="About.html">About AquaLive</a>
+      <a href="Contact.html">Contact Us</a>
+      <a href="About.html#doa">DOA Policy</a>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <a href="mailto:hello@aqualive.my">📧 hello@aqualive.my</a>
+      <a href="#">📞 +60 12-345 6789</a>
+      <a href="#">📍 Kuala Lumpur, Malaysia</a>
+      <a href="#">🕒 Mon–Sun, 10AM–8PM</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 AquaLive ·</span>
+    <span class="footer-edu">⚠️ Educational demo only — no real transactions</span>
+  </div>
+</footer>
+
+<script src="aqualive.js"></script>
+<script>
+injectNavbar("Home");
+
+// Bubbles
+const bubbleContainer = document.getElementById("bubbles");
+for (let i = 0; i < 18; i++) {
+  const b = document.createElement("div");
+  b.className = "bubble";
+  const size = Math.random() * 60 + 10;
+  b.style.cssText = `
+    width:${size}px; height:${size}px;
+    left:${Math.random()*100}%;
+    animation-duration:${Math.random()*15+8}s;
+    animation-delay:${Math.random()*10}s;
+  `;
+  bubbleContainer.appendChild(b);
+}
+
+// Featured products
+const featured = ["b1","f1","f4","k4","b2","f2"];
+const container = document.getElementById("featured-products");
+featured.forEach(id => {
+  const p = PRODUCTS.find(x => x.id === id);
+  if (!p) return;
+  const tagClass = "tag-" + (p.tag || "").replace(/\s/g,"");
+  container.innerHTML += `
+    <div class="product-card">
+      <img class="thumb" src="${p.image}" alt="${p.name}" loading="lazy">
+      <div class="card-body">
+        ${p.tag ? `<span class="tag ${tagClass}">${p.tag}</span>` : ""}
+        <h3>${p.name}</h3>
+        ${p.care ? `<div class="care-info"><span>🌡 ${p.temp}</span><span>📏 ${p.size}</span><span>🎯 ${p.care}</span></div>` : ""}
+        <div class="price">RM ${p.price}</div>
+        <button class="btn btn-primary" onclick="Cart.add(${JSON.stringify(p).replace(/"/g,'&quot;')})">Add to Cart</button>
+      </div>
+    </div>
+  `;
+});
+</script>
+</body>
+</html>

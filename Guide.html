@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Fish Care Guide – AquaLive</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
+<style>
+.guide-toc { background:#fff; border-radius:var(--radius-lg); padding:24px 28px; box-shadow:var(--shadow); margin-bottom:32px; }
+.guide-toc h3 { font-family:var(--font-body); font-weight:700; margin-bottom:12px; font-size:14px; text-transform:uppercase; letter-spacing:.06em; color:var(--slate); }
+.guide-toc ul { list-style:none; display:flex; flex-wrap:wrap; gap:8px; }
+.guide-toc a  { background:var(--mist); padding:6px 14px; border-radius:20px; font-size:13px; font-weight:500; color:var(--ocean); transition:background 0.2s; }
+.guide-toc a:hover { background:var(--ocean); color:#fff; }
+.guide-section { background:#fff; border-radius:var(--radius-lg); padding:32px; box-shadow:var(--shadow); margin-bottom:24px; scroll-margin-top:90px; }
+.guide-section h2 { font-size:22px; margin-bottom:16px; display:flex; align-items:center; gap:10px; }
+.guide-section ul { list-style:none; padding:0; }
+.guide-section ul li { padding:8px 0; border-bottom:1px solid var(--pebble); font-size:14px; line-height:1.6; display:flex; gap:8px; align-items:flex-start; }
+.guide-section ul li:last-child { border-bottom:none; }
+.guide-section ul li::before { content:"✓"; color:var(--ocean); font-weight:700; flex-shrink:0; margin-top:1px; }
+.species-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:16px; }
+.species-card { background:var(--mist); border-radius:var(--radius); padding:18px; border-left:4px solid var(--ocean); }
+.species-card h4 { font-family:var(--font-body); font-weight:700; font-size:14px; margin-bottom:6px; }
+.species-card p  { font-size:12px; color:var(--slate); line-height:1.5; }
+.species-card .care-badge { display:inline-block; font-size:10px; font-weight:700; padding:2px 8px; border-radius:10px; margin-bottom:8px; }
+.care-easy     { background:#d1fae5; color:#065f46; }
+.care-moderate { background:#fef3c7; color:#92400e; }
+.care-advanced { background:#fee2e2; color:#991b1b; }
+</style>
+</head>
+<body>
+<div id="main-navbar"></div>
+
+<div class="page-header">
+  <h1>Fish Care Guide</h1>
+  <p>Everything you need to keep your aquarium healthy, vibrant, and thriving</p>
+</div>
+
+<section class="section-gap" style="padding-top:32px;">
+  <div class="page-wrap">
+
+    <div class="guide-toc">
+      <h3>Quick Navigation</h3>
+      <ul>
+        <li><a href="#species">Fish Species</a></li>
+        <li><a href="#water">Water Quality</a></li>
+        <li><a href="#temperature">Temperature</a></li>
+        <li><a href="#feeding">Feeding</a></li>
+        <li><a href="#new-fish">New Fish</a></li>
+        <li><a href="#plants">Live Plants</a></li>
+        <li><a href="#disease">Disease</a></li>
+        <li><a href="#compatibility">Compatibility</a></li>
+        <li><a href="#emergency">Emergencies</a></li>
+      </ul>
+    </div>
+
+    <div class="guide-section" id="species">
+      <h2>🐟 Common Fish Species We Sell</h2>
+      <div class="species-grid">
+        <div class="species-card"><span class="care-badge care-easy">Easy</span><h4>Betta Fish</h4><p>Vivid solitary fish. Keep alone in 10L+. Temperature 24–28°C. Feed high-protein pellets daily.</p></div>
+        <div class="species-card"><span class="care-badge care-easy">Easy</span><h4>Guppy</h4><p>Hardy livebearer. Great for beginners. 22–28°C, community safe. Breeds easily.</p></div>
+        <div class="species-card"><span class="care-badge care-easy">Easy</span><h4>Neon Tetra</h4><p>School in groups of 6+. Peaceful. 22–26°C. Avoid large aggressive tank mates.</p></div>
+        <div class="species-card"><span class="care-badge care-easy">Easy</span><h4>Goldfish</h4><p>Cooler water 18–22°C. Needs 60L+ and good filtration. Do not mix with tropical fish.</p></div>
+        <div class="species-card"><span class="care-badge care-easy">Easy</span><h4>Corydoras</h4><p>Bottom-dwelling cleaner. Keep in groups of 3+. 22–26°C. Very peaceful community fish.</p></div>
+        <div class="species-card"><span class="care-badge care-easy">Easy</span><h4>Zebra Danio</h4><p>Extremely hardy schooling fish. Ideal for cycling a new tank. 18–24°C.</p></div>
+        <div class="species-card"><span class="care-badge care-moderate">Moderate</span><h4>Angelfish</h4><p>Elegant cichlid. 24–28°C, 100L+. May eat very small fish. Peaceful with similar-sized tank mates.</p></div>
+        <div class="species-card"><span class="care-badge care-moderate">Moderate</span><h4>Molly</h4><p>Livebearer, adaptable. Slightly hard water preferred. 24–28°C. Community friendly.</p></div>
+        <div class="species-card"><span class="care-badge care-advanced">Advanced</span><h4>Discus</h4><p>King of freshwater fish. Demands pristine water (28–30°C, pH 6–7). For experienced keepers only.</p></div>
+      </div>
+    </div>
+
+    <div class="guide-section" id="water">
+      <h2>💧 Water Quality & Parameters</h2>
+      <ul>
+        <li>Test water weekly — Ammonia 0 ppm, Nitrite 0 ppm, Nitrate below 20 ppm, pH 6.5–7.5 for most tropical fish</li>
+        <li>Perform 20–30% water changes every week to maintain stable parameters</li>
+        <li>Always use a dechlorinator before adding tap water to the tank</li>
+        <li>Cycle your tank for 4–6 weeks before adding fish — this establishes beneficial bacteria</li>
+        <li>Avoid sudden parameter swings; change water gradually and match temperature</li>
+        <li>Use a strong biological filter rated for at least 2× your tank volume</li>
+        <li>Never use soap or detergent to clean tank equipment</li>
+      </ul>
+    </div>
+
+    <div class="guide-section" id="temperature">
+      <h2>🌡 Temperature & Environment</h2>
+      <ul>
+        <li>Tropical fish: 24–28°C. Goldfish: 18–22°C. Discus: 28–30°C</li>
+        <li>Use an aquarium heater and a separate thermometer to verify temperature accuracy</li>
+        <li>Keep the tank away from direct sunlight, air-conditioning vents, and windows</li>
+        <li>Maintain good surface agitation for oxygen exchange — filter return or air stone</li>
+        <li>Add caves, plants, and driftwood to provide hiding spots and reduce stress</li>
+        <li>Avoid temperature fluctuations of more than 1–2°C in a single day</li>
+      </ul>
+    </div>
+
+    <div class="guide-section" id="feeding">
+      <h2>🍽 Feeding & Nutrition</h2>
+      <ul>
+        <li>Feed small amounts 1–2 times daily — only what fish can consume in 2 minutes</li>
+        <li>Uneaten food causes ammonia spikes; remove any leftover food promptly</li>
+        <li>Vary the diet: alternate between flakes, pellets, and frozen/live foods like bloodworms</li>
+        <li>Fast your fish one day per week to prevent constipation and overfeeding-related issues</li>
+        <li>Herbivorous fish (plecos, some cichlids) also need blanched vegetables like zucchini</li>
+        <li>Bettas are carnivores — feed betta-specific pellets, not generic flakes</li>
+      </ul>
+    </div>
+
+    <div class="guide-section" id="new-fish">
+      <h2>🆕 Introducing New Fish</h2>
+      <ul>
+        <li>Float the unopened transport bag in your tank for 15–20 minutes to equalise temperature</li>
+        <li>Drip-acclimate slowly by adding tank water to the bag every 5 minutes over 30 minutes</li>
+        <li>Do NOT pour bag water into your tank — it may contain pathogens or poor-quality water</li>
+        <li>Quarantine new fish in a separate tank for 2–4 weeks before introducing to your main tank</li>
+        <li>Dim the lights for the first few hours after introduction to reduce stress</li>
+        <li>Feed lightly for the first 48 hours — new fish are often stressed and will not eat immediately</li>
+      </ul>
+    </div>
+
+    <div class="guide-section" id="plants">
+      <h2>🌿 Live Plants</h2>
+      <ul>
+        <li>Live plants improve oxygen levels, absorb nitrates, and reduce algae by competing for nutrients</li>
+        <li>Beginner-friendly plants: Java Fern, Anubias, Java Moss, Hornwort (no specialist lighting needed)</li>
+        <li>Plants need light 8–10 hours/day — use a timer for consistency</li>
+        <li>Use liquid fertiliser or root tabs if plants show yellowing leaves</li>
+        <li>Trim regularly to prevent overgrowth and maintain good water circulation</li>
+        <li>Rinse plants thoroughly before adding to tank to remove snails or pests</li>
+      </ul>
+    </div>
+
+    <div class="guide-section" id="disease">
+      <h2>🏥 Disease Prevention & Treatment</h2>
+      <ul>
+        <li><strong>Ich (white spots):</strong> Raise temperature to 28°C and treat with aquarium salt or ich medication</li>
+        <li><strong>Fin Rot:</strong> Usually caused by poor water quality. Improve water conditions, use antibacterial treatment</li>
+        <li><strong>Velvet (gold dust appearance):</strong> Highly contagious. Dim lights, treat with copper-based medication</li>
+        <li>Prevention: maintain good water quality, quarantine new arrivals, avoid overcrowding</li>
+        <li>Keep a hospital tank ready for sick fish — treating in the main tank affects beneficial bacteria</li>
+        <li>Never use medications beyond the recommended dose — overdosing can kill fish</li>
+        <li>Do not mix medications without professional advice</li>
+      </ul>
+    </div>
+
+    <div class="guide-section" id="compatibility">
+      <h2>🤝 Fish Compatibility</h2>
+      <ul>
+        <li>Never keep two male Betta fish together — they will fight to the death</li>
+        <li>Avoid mixing fin-nippers (tiger barbs, serpae tetras) with slow or long-finned fish</li>
+        <li>Research adult size before buying — a small "community" fish may grow large enough to eat others</li>
+        <li>Match temperature requirements — do not mix goldfish (cool water) with tropical fish</li>
+        <li>Add new fish gradually to avoid overwhelming the tank's biological filtration</li>
+        <li>Provide territory and hiding places to reduce aggression among cichlids and other territorial species</li>
+      </ul>
+    </div>
+
+    <div class="guide-section" id="emergency">
+      <h2>🚨 Emergency Situations</h2>
+      <ul>
+        <li><strong>Fish gasping at surface:</strong> Low dissolved oxygen. Add air stone, do partial water change immediately</li>
+        <li><strong>Cloudy water:</strong> Bacterial bloom — usually harmless but do a partial water change and check filter</li>
+        <li><strong>Green water:</strong> Algae bloom from too much light or nutrients. Reduce light hours and do a water change</li>
+        <li><strong>Fish hiding constantly:</strong> Sign of stress or illness. Check water parameters and look for bullying</li>
+        <li><strong>Power outage:</strong> Use a battery-powered air pump to maintain oxygen. Act fast in hot weather</li>
+        <li><strong>Fish floating sideways:</strong> Swim bladder issue. Fast the fish for 48 hours, then feed a blanched pea</li>
+      </ul>
+    </div>
+
+    <div style="background:linear-gradient(135deg,var(--deep),var(--ocean));border-radius:var(--radius-lg);padding:48px;text-align:center;color:#fff;margin-top:32px;">
+      <h2 style="margin-bottom:10px;">Ready to Start?</h2>
+      <p style="opacity:.85;margin-bottom:24px;">Browse our beginner-friendly fish and starter kits</p>
+      <a href="Shop.html" class="btn-white" style="background:#fff;color:var(--ocean);padding:14px 32px;border-radius:8px;font-weight:700;text-decoration:none;">Shop Now →</a>
+    </div>
+
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div><div class="footer-logo">🐟 AquaLive</div><p class="footer-tagline">Premium live fish delivered safely.</p></div>
+    <div><h4>Shop</h4><a href="Shop.html">All Products</a></div>
+    <div><h4>Help</h4><a href="About.html">About Us</a><a href="Contact.html">Contact</a></div>
+    <div><h4>Contact</h4><a href="#">📧 hello@aqualive.my</a></div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 AquaLive · 6751YCOM Project · YPC International College</span>
+    <span class="footer-edu">⚠️ Educational demo only — no real transactions</span>
+  </div>
+</footer>
+<script src="aqualive.js"></script>
+<script>injectNavbar("Fish Care Guide");</script>
+</body>
+</html>

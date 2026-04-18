@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Cart – AquaLive</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
+<style>
+.cart-layout { display: grid; grid-template-columns: 1fr 340px; gap: 28px; margin-top: 32px; }
+
+.cart-item {
+  background: #fff;
+  border-radius: var(--radius);
+  padding: 18px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 12px;
+  box-shadow: var(--shadow);
+}
+
+.cart-item img { width: 80px; height: 80px; object-fit: cover; border-radius: 8px; flex-shrink:0; background: var(--mist); }
+
+.item-info { flex: 1; }
+.item-name { font-weight: 700; font-size: 15px; margin-bottom: 4px; }
+.item-price { color: var(--ocean); font-weight: 600; font-size: 14px; }
+
+.qty-ctrl {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.qty-btn {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  border: 2px solid var(--pebble);
+  background: #fff;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.2s, color 0.2s;
+}
+.qty-btn:hover { border-color: var(--ocean); color: var(--ocean); }
+
+.qty-num { font-weight: 700; min-width: 20px; text-align: center; }
+
+.remove-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--slate);
+  font-size: 18px;
+  padding: 4px;
+  transition: color 0.2s;
+}
+.remove-btn:hover { color: var(--error); }
+
+.order-summary {
+  background: #fff;
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  box-shadow: var(--shadow);
+  height: fit-content;
+  position: sticky;
+  top: 90px;
+}
+
+.order-summary h3 { font-size: 18px; margin-bottom: 20px; }
+
+.summary-line {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--pebble);
+}
+
+.summary-total {
+  display: flex;
+  justify-content: space-between;
+  font-size: 18px;
+  font-weight: 700;
+  padding: 16px 0 20px;
+  color: var(--ocean);
+}
+
+.empty-cart {
+  text-align: center;
+  padding: 80px 20px;
+  color: var(--slate);
+}
+
+.empty-cart .emoji { font-size: 64px; margin-bottom: 16px; }
+
+/* RECOMMENDED */
+.rec-section { margin-top: 48px; }
+
+@media (max-width: 900px) { .cart-layout { grid-template-columns: 1fr; } .order-summary { position: static; } }
+</style>
+</head>
+<body>
+<div id="main-navbar"></div>
+
+<div class="page-header">
+  <h1>Your Cart</h1>
+  <p>Review your items before checkout</p>
+</div>
+
+<section class="section-gap" style="padding-top:32px;">
+  <div class="page-wrap">
+    <div id="cart-content"></div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div><div class="footer-logo">🐟 AquaLive</div><p class="footer-tagline">Premium live fish delivered safely.</p></div>
+    <div><h4>Shop</h4><a href="Shop.html">All Products</a></div>
+    <div><h4>Help</h4><a href="About.html">About Us</a><a href="Contact.html">Contact</a></div>
+    <div><h4>Contact</h4><a href="#">📧 hello@aqualive.my</a></div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 AquaLive · 6751YCOM Project · YPC International College</span>
+    <span class="footer-edu">⚠️ Educational demo only — no real transactions</span>
+  </div>
+</footer>
+
+<script src="aqualive.js"></script>
+<script>
+injectNavbar("Shop");
+
+function renderCart() {
+  const cart = Cart.get();
+  const content = document.getElementById("cart-content");
+
+  if (cart.length === 0) {
+    content.innerHTML = `
+      <div class="empty-cart">
+        <div class="emoji">🛒</div>
+        <h2>Your cart is empty</h2>
+        <p style="margin-bottom:24px;">Browse our collection of live fish and aquarium supplies</p>
+        <a href="Shop.html" class="btn btn-primary btn-lg" style="width:auto;display:inline-flex;">Browse Products</a>
+      </div>
+    `;
+    return;
+  }
+
+  let subtotal = 0;
+  const items = cart.map((item, i) => {
+    subtotal += item.price * item.qty;
+    return `
+      <div class="cart-item">
+        <img src="${item.image}" alt="${item.name}">
+        <div class="item-info">
+          <div class="item-name">${item.name}</div>
+          <div class="item-price">RM ${item.price} each</div>
+        </div>
+        <div class="qty-ctrl">
+          <button class="qty-btn" onclick="changeQty('${item.id}',-1)">−</button>
+          <span class="qty-num">${item.qty}</span>
+          <button class="qty-btn" onclick="changeQty('${item.id}',1)">+</button>
+        </div>
+        <div style="font-weight:700;min-width:70px;text-align:right;color:var(--ocean)">RM ${(item.price*item.qty).toFixed(2)}</div>
+        <button class="remove-btn" onclick="removeItem('${item.id}')">🗑</button>
+      </div>
+    `;
+  }).join("");
+
+  const shipping = subtotal > 0 ? 10 : 0;
+  const tax      = subtotal * 0.06;
+  const total    = subtotal + shipping + tax;
+
+  // Recommended
+  const recIds = ["f5","fd1","fd4","k2"].filter(id => !cart.find(i=>i.id===id)).slice(0,3);
+  const recHtml = recIds.map(id => {
+    const p = PRODUCTS.find(x=>x.id===id);
+    if (!p) return "";
+    return `
+      <div class="product-card">
+        <img class="thumb" src="${p.image}" alt="${p.name}" loading="lazy">
+        <div class="card-body">
+          <h3 style="font-size:14px;">${p.name}</h3>
+          <div class="price">RM ${p.price}</div>
+          <button class="btn btn-primary btn-sm" onclick='Cart.add(${JSON.stringify(p).replace(/"/g,"&quot;")});renderCart()'>Add to Cart</button>
+        </div>
+      </div>
+    `;
+  }).join("");
+
+  content.innerHTML = `
+    <div class="cart-layout">
+      <div>
+        <h2 style="margin-bottom:20px;">${cart.length} item${cart.length!==1?'s':''}</h2>
+        ${items}
+        <a href="Shop.html" class="btn btn-outline" style="margin-top:8px;">← Continue Shopping</a>
+      </div>
+
+      <div class="order-summary">
+        <h3>Order Summary</h3>
+
+        <div class="summary-line"><span>Subtotal</span><span>RM ${subtotal.toFixed(2)}</span></div>
+        <div class="summary-line"><span>Shipping</span><span>RM ${shipping.toFixed(2)}</span></div>
+        <div class="summary-line"><span>Tax (6%)</span><span>RM ${tax.toFixed(2)}</span></div>
+        <div class="summary-total"><span>Total</span><span>RM ${total.toFixed(2)}</span></div>
+
+        <a href="Checkout.html" class="btn btn-primary btn-lg">Proceed to Checkout →</a>
+
+        <div style="margin-top:16px;padding:12px;background:var(--mist);border-radius:8px;font-size:12px;color:var(--slate);">
+          🫧 All fish are oxygen-packed for safe delivery<br>
+          📦 DOA replacement guarantee included<br>
+          ⚠️ Educational demo — no real payment
+        </div>
+      </div>
+    </div>
+
+    ${recHtml ? `
+    <div class="rec-section">
+      <h2 class="section-title" style="margin-bottom:8px;">You May Also Like</h2>
+      <p class="section-sub">Popular add-ons for your aquarium</p>
+      <div class="grid-4" style="grid-template-columns:repeat(auto-fill,minmax(220px,1fr));">${recHtml}</div>
+    </div>` : ""}
+  `;
+}
+
+function changeQty(id, delta) {
+  Cart.changeQty(id, delta);
+  renderCart();
+}
+
+function removeItem(id) {
+  Cart.remove(id);
+  renderCart();
+}
+
+renderCart();
+</script>
+</body>
+</html>
